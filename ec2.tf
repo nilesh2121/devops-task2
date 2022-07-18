@@ -37,6 +37,18 @@ resource "aws_instance" "webserver" {
       
     }
 
+    #IP of aws instance copied to a file ip.txt in local system
+
+    resource "local_file" "hosts" {
+      content  = aws_instance.webserver.public_ip
+      filename = "hosts.txt"
+}
+
+    #copying the ip.txt file to the Ansible control node from local system 
+    provisioner "file" {
+      source      = "hosts.txt"
+      destination = "/home/ubuntu/devops-task2/hosts.txt"
+       }
 
 
 
@@ -47,8 +59,7 @@ resource "aws_instance" "webserver" {
   }
 
 
-         
-
+   
    
       
 }
