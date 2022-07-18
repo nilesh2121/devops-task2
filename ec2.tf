@@ -79,13 +79,15 @@ resource "aws_instance" "webserver" {
     timeout     = "4m"
     }
 
-  }
-
   provisioner "file" {
     source      = "ip.txt"
     destination = "/home/ubuntu/devops-task2/hosts"
 
-       }
+       }    
+
+  }
+
+
     
 
 
