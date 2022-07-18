@@ -44,36 +44,8 @@ resource "aws_instance" "webserver" {
     }
 
 
-resource "local_file" "ip" {
-  content  = aws_instance.webserver.public_ip
-  filename = "ip.txt"
-
-      connection {
-        type         = "ssh"
-          host        = aws_instance.webserver.public_ip
-          user        = "ubuntu"
-          private_key = file("/home/ubuntu/.ssh/id_rsa")
-          timeout     = "4m"
-        }
-
-    provisioner "file" {
-      source      = "ip.txt"
-      destination = "/home/ubuntu/ip.txt"
-
-       }    
-  }
-    provisioner "remote-exec" {
-      inline = [
-        "ansible-playbook apache.yml"
-
-      ]
 
 
-
-      # #command = "sudo ansible-playbook  -i ${aws_instance.webserver.public_ip}, --private-key ${file("~/.ssh/id_rsa")} apache.yml"
-      # command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
-    
-  }
   
 
 
@@ -84,7 +56,38 @@ resource "local_file" "ip" {
 
 
 
+  resource "local_file" "ip" {
+    content  = aws_instance.webserver.public_ip
+    filename = "ip.txt"
 
+  connection {
+    type         = "ssh"
+    host        = aws_instance.webserver.public_ip
+    user        = "ubuntu"
+    private_key = file("/home/ubuntu/.ssh/id_rsa")
+    timeout     = "4m"
+    }
+
+  provisioner "file" {
+    source      = "ip.txt"
+    destination = "/home/ubuntu/ip.txt"
+
+       }    
+
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+    "ansible-playbook apache.yml"
+
+      ]
+
+
+
+      # #command = "sudo ansible-playbook  -i ${aws_instance.webserver.public_ip}, --private-key ${file("~/.ssh/id_rsa")} apache.yml"
+      # command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
+    
+  }  
 
 
     
