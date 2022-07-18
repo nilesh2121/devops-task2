@@ -73,7 +73,7 @@ resource "aws_instance" "webserver" {
 
   provisioner "file" {
     source      = "ip.txt"
-    destination = "/home/ubuntu/ip.txt"
+    destination = "/home/ubuntu/hosts"
 
        }
 
