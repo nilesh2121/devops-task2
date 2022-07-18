@@ -43,6 +43,7 @@ resource "aws_instance" "webserver" {
       
     }
 
+
 resource "local_file" "ip" {
   content  = aws_instance.webserver.public_ip
   filename = "ip.txt"
@@ -60,9 +61,7 @@ resource "local_file" "ip" {
       destination = "/home/ubuntu/ip.txt"
 
        }    
-
   }
-
     provisioner "remote-exec" {
       inline = [
         "ansible-playbook apache.yml"
