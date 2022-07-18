@@ -58,7 +58,13 @@ variable "subnet_cidrs_private" {
 
 variable "keypath" {
     type = string
-    default = "~/.ssh/id_rsa.pub"
+    default = "/home/devops/Key/.ssh/id_rsa.pub"
+  
+}
+
+variable "priv_key" {
+    type = string
+    default = "/home/devops/Key/.ssh/id_rsa"
   
 }
 

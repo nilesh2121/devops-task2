@@ -15,7 +15,7 @@ resource "aws_instance" "webserver" {
       type         = "ssh"
       host        = aws_instance.webserver.public_ip
       user        = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = var.priv_key
       timeout     = "4m"
     } 
 
@@ -103,19 +103,19 @@ resource "aws_instance" "dbserver" {
 
 # added the keypaire location - production
 
-# resource "aws_key_pair" "mylaptop-us" {
-#     key_name = "mylaptop-us"
-#     public_key = file("/home/devops/Key/.ssh/id_rsa.pub")
+resource "aws_key_pair" "mylaptop-us" {
+    key_name = "mylaptop-us"
+    public_key = var.keypath
     
-# }
+}
 
 
 # added the keypaire location -- staging 
 
-resource "aws_key_pair" "mylaptop-us" {
-    key_name = "mylaptop-us"
-    public_key = file("~/.ssh/id_rsa.pub")
-}
+# resource "aws_key_pair" "mylaptop-us" {
+#     key_name = "mylaptop-us"
+#     public_key = file("~/.ssh/id_rsa.pub")
+# }
 
 
 
