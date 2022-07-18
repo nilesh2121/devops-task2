@@ -31,11 +31,11 @@ resource "aws_instance" "webserver" {
 
     }
 
-    # provisioner "file" {
-    #   source = "/home/ubuntu/devops-task2/apache.yml"
-    #   destination = "/home/ubuntu/apache.yml"
+    provisioner "file" {
+      source = "/home/ubuntu/devops-task2/apache.yml"
+      destination = "/home/ubuntu/apache.yml"
       
-    # }
+    }
 
 
 
