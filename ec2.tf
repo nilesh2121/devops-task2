@@ -71,8 +71,8 @@ resource "aws_instance" "webserver" {
     content  = aws_instance.webserver.public_ip
     filename = "ip.txt"
 
-  resouces "null_resource" "nullremote1" {
-  depends_on = [aws_instance.webserver]
+resouces "null_resource" "nullremote1" {
+depends_on = [aws_instance.webserver]
   connection {
     type         = "ssh"
     host        = aws_instance.webserver.public_ip
