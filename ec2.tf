@@ -79,7 +79,7 @@ resource "aws_instance" "webserver" {
 
   provisioner "remote-exec" {
     inline = [
-    "ansible-playbook -i ip.txt apache.yml"
+    "ansible-playbook  apache.yml"
 
       ]
 
