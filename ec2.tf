@@ -47,7 +47,6 @@ resource "aws_instance" "webserver" {
 
     provisioner "remote-exec" {
       inline = [
-        "cd /home/ubuntu/devops-task2/",
         "ansible-playbook apache.yml"
 
       ]
@@ -68,10 +67,10 @@ resource "aws_instance" "webserver" {
 
   resource "local_file" "ip" {
     content  = aws_instance.webserver.public_ip
-    filename = "ip.txt"
+    filename = "/tmp/ip.txt"
 
   provisioner "file" {
-    source      = "ip.txt"
+    source      = "/tmp/ip.txt"
     destination = "/home/ubuntu/devops-task2/hosts"
       
       }
