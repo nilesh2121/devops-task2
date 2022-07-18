@@ -9,6 +9,8 @@ resource "aws_instance" "webserver" {
     tags = {
       Name = "web-server"
     }
+    #IP of aws instance copied to a file ip.txt in local system
+
     # user_data = file("script/user.sh")
 
     connection {
@@ -30,6 +32,10 @@ resource "aws_instance" "webserver" {
       ]
 
     }
+    depends_on = [
+      aws_instance.webserver,
+      local_file.hosts
+    ]
 
     provisioner "file" {
       source = "/home/ubuntu/devops-task2/apache.yml"
@@ -37,12 +43,7 @@ resource "aws_instance" "webserver" {
       
     }
 
-    #IP of aws instance copied to a file ip.txt in local system
 
-    resource "local_file" "hosts" {
-      content  = aws_instance.webserver.public_ip
-      filename = "hosts.txt"
-}
 
     #copying the ip.txt file to the Ansible control node from local system 
     provisioner "file" {
@@ -57,11 +58,21 @@ resource "aws_instance" "webserver" {
       command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
     
   }
+  
 
 
    
    
       
+}
+
+resource "local_file" "hosts" {
+  content  = aws_instance.webserver.public_ip
+  filename = "hosts.txt"
+
+  depends_on = [
+    aws_instance.webserver
+  ]
 }
 
     
