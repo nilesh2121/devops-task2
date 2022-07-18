@@ -34,7 +34,7 @@ resource "aws_instance" "webserver" {
     }
     depends_on = [
       aws_instance.webserver,
-      local_file.hosts
+      local_file.ip
     ]
 
     provisioner "file" {
