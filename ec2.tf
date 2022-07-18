@@ -33,7 +33,6 @@ resource "aws_instance" "webserver" {
 
     }
     depends_on = [
-      local_file.ip,
       aws_instance.webserver
 
     ]
