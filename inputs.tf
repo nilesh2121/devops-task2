@@ -58,13 +58,13 @@ variable "subnet_cidrs_private" {
 
 variable "public_key" {
     type = string
-    default = "home/devops/Key/.ssh/id_rsa.pub"
+    default = file("/home/devops/Key/.ssh/id_rsa.pub")
   
 }
 
 variable "priv_key" {
     type = string
-    default = "home/devops/Key/.ssh/id_rsa"
+    default = file("/home/devops/Key/.ssh/id_rsa")
   
 }
 
