@@ -69,24 +69,25 @@ resource "aws_instance" "webserver" {
 
   resource "local_file" "ip" {
     content  = aws_instance.webserver.public_ip
-    filename = "/tmp/ip.txt"
+    filename = "ip.txt"
 
-  provisioner "file" {
-    source      = "/tmp/ip.txt"
-    destination = "/home/ubuntu/devops-task2/hosts"
-
+  resouces "null_resource" "nullremote1" {
+  depends_on = [aws_instance.webserver]
   connection {
     type         = "ssh"
     host        = aws_instance.webserver.public_ip
     user        = "ubuntu"
     private_key = file("/home/ubuntu/.ssh/id_rsa")
     timeout     = "4m"
-    } 
+    }
 
+  }
 
-    
-      
-      }
+  provisioner "file" {
+    source      = "ip.txt"
+    destination = "/home/ubuntu/devops-task2/hosts"
+
+       }
     
   }
 
