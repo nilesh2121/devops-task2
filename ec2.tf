@@ -81,7 +81,7 @@ resource "aws_instance" "webserver" {
 
   provisioner "file" {
     source      = "ip.txt"
-    destination = "/home/ubuntu/devops-task2/hosts"
+    destination = "/home/ubuntu/ip.txt"
 
        }    
 
