@@ -56,7 +56,7 @@ variable "subnet_cidrs_private" {
 
 # added the keypath location
 
-variable "keypath" {
+variable "public_key" {
     type = string
     default = "/home/devops/Key/.ssh/id_rsa.pub"
   
