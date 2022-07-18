@@ -66,9 +66,9 @@ resource "aws_instance" "webserver" {
       
 }
 
-resource "local_file" "hosts" {
+resource "local_file" "ip" {
   content  = aws_instance.webserver.public_ip
-  filename = "hosts.txt"
+  filename = "ip.txt"
 
   depends_on = [
     aws_instance.webserver
