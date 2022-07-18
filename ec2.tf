@@ -48,13 +48,13 @@ resource "local_file" "ip" {
   content  = aws_instance.webserver.public_ip
   filename = "ip.txt"
 
-  connection {
-    type         = "ssh"
-    host        = aws_instance.webserver.public_ip
-    user        = "ubuntu"
-    private_key = file("/home/ubuntu/.ssh/id_rsa")
-    timeout     = "4m"
-    }
+      connection {
+        type         = "ssh"
+          host        = aws_instance.webserver.public_ip
+          user        = "ubuntu"
+          private_key = file("/home/ubuntu/.ssh/id_rsa")
+          timeout     = "4m"
+        }
 
     provisioner "file" {
       source      = "ip.txt"
