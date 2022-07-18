@@ -44,8 +44,8 @@ resource "aws_instance" "webserver" {
     }
 
 resource "local_file" "ip" {
-    content  = aws_instance.webserver.public_ip
-    filename = "ip.txt"
+  content  = aws_instance.webserver.public_ip
+  filename = "ip.txt"
 
   connection {
     type         = "ssh"
