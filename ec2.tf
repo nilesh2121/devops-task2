@@ -33,6 +33,7 @@ resource "aws_instance" "webserver" {
 
     }
     depends_on = [
+      local_file.ip,
       aws_instance.webserver
 
     ]
@@ -47,9 +48,11 @@ resource "aws_instance" "webserver" {
 
     #copying the ip.txt file to the Ansible control node from local system 
     provisioner "file" {
-      source      = "hosts.txt"
+      source      = "ip.txt"
       destination = "/home/ubuntu/devops-task2/hosts.txt"
-       }
+      
+      }
+    
 
 
 
