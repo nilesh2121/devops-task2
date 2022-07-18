@@ -72,9 +72,7 @@ resource "aws_instance" "webserver" {
     source      = "ip.txt"
     destination = "/home/ubuntu/ip.txt"
 
-       }    
-
-  }
+       }
 
   provisioner "remote-exec" {
     inline = [
@@ -87,7 +85,11 @@ resource "aws_instance" "webserver" {
       # #command = "sudo ansible-playbook  -i ${aws_instance.webserver.public_ip}, --private-key ${file("~/.ssh/id_rsa")} apache.yml"
       # command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
     
-  }  
+  }      
+
+  }
+
+
 
 
     
