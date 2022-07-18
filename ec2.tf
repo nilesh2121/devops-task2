@@ -45,19 +45,17 @@ resource "aws_instance" "webserver" {
 
 
 
-    #copying the ip.txt file to the Ansible control node from local system 
-    provisioner "file" {
-      source      = "ip.txt"
-      destination = "/home/ubuntu/devops-task2/hosts.txt"
-      
-      }
-    
+    provisioner "remote-exec" {
+      inline = [
+        "cd /home/ubuntu/devops-task2/",
+        "ansible-playbook apache.yml"
+
+      ]
 
 
 
-    provisioner "local-exec" {
-      #command = "sudo ansible-playbook  -i ${aws_instance.webserver.public_ip}, --private-key ${file("~/.ssh/id_rsa")} apache.yml"
-      command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
+      # #command = "sudo ansible-playbook  -i ${aws_instance.webserver.public_ip}, --private-key ${file("~/.ssh/id_rsa")} apache.yml"
+      # command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
     
   }
   
@@ -68,14 +66,20 @@ resource "aws_instance" "webserver" {
       
 }
 
-resource "local_file" "ip" {
-  content  = aws_instance.webserver.public_ip
-  filename = "ip.txt"
+  resource "local_file" "ip" {
+    content  = aws_instance.webserver.public_ip
+    filename = "ip.txt"
 
-  depends_on = [
-    aws_instance.webserver
-  ]
-}
+  provisioner "file" {
+    source      = "ip.txt"
+    destination = "/home/ubuntu/devops-task2/hosts"
+      
+      }
+    
+  }
+
+
+
 
     
 
