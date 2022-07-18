@@ -59,6 +59,9 @@ resource "aws_instance" "webserver" {
   resource "local_file" "ip" {
     content  = aws_instance.webserver.public_ip
     filename = "ip.txt"
+    depends_on = [
+      aws_instance.webserver
+    ]
 
   connection {
     type         = "ssh"
@@ -76,7 +79,7 @@ resource "aws_instance" "webserver" {
 
   provisioner "remote-exec" {
     inline = [
-    "ansible-playbook apache.yml"
+    "ansible-playbook -i ip.txt apache.yml"
 
       ]
 
