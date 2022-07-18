@@ -1,7 +1,7 @@
 ---
 - name: install apache
   become: yes
-  hosts: localhost
+  hosts: webserver
   tasks:
     - name : install apache
       ansible.builtin.apt:
