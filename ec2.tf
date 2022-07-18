@@ -42,7 +42,7 @@ resource "aws_instance" "webserver" {
 
     provisioner "local-exec" {
       #command = "sudo ansible-playbook  -i ${aws_instance.webserver.public_ip}, --private-key ${file("~/.ssh/id_rsa")} apache.yml"
-      command = "ansible-playbook -i ${aws_instance.webserver.public_ip} apache.yml"
+      command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
     
   }
 
