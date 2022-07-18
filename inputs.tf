@@ -58,15 +58,15 @@ variable "subnet_cidrs_private" {
 
 variable "public_key" {
     type = string
-    default = file("/home/devops/Key/.ssh/id_rsa.pub")
+    default = file("/home/ubuntu/Key/.ssh/id_rsa.pub")
   
 }
 
-variable "priv_key" {
-    type = string
-    default = file("/home/devops/Key/.ssh/id_rsa")
+# variable "priv_key" {
+#     type = string
+#     default = file("/home/ubuntu/Key/.ssh/id_rsa")
   
-}
+# }
 
 # variable "username" {
 #     type = string
