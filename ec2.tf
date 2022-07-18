@@ -31,11 +31,11 @@ resource "aws_instance" "webserver" {
 
     }
 
-    provisioner "file" {
-      source = "/Study 2020/devops task/devops-task2/apache.yml"
-      destination = "/home/ubuntu/apache.yml"
+    # provisioner "file" {
+    #   source = "/home/ubuntu/devops-task2/apache.yml"
+    #   destination = "/home/ubuntu/apache.yml"
       
-    }
+    # }
 
 
 
@@ -103,11 +103,11 @@ resource "aws_instance" "dbserver" {
 
 # added the keypaire location - production
 
-resource "aws_key_pair" "terrakey" {
-    key_name = "terrakey"
-    public_key = file("/home/ubuntu/.ssh/id_rsa.pub")
+# resource "aws_key_pair" "terrakey" {
+#     key_name = "terrakey"
+#     public_key = file("/home/ubuntu/.ssh/id_rsa.pub")
     
-}
+# }
 
 
 # added the keypaire location -- staging 
