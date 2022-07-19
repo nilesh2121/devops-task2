@@ -62,11 +62,11 @@ variable "subnet_cidrs_private" {
   
 # }
 
-# variable "priv_key" {
-#     type = string
-#     default = file("/home/ubuntu/Key/.ssh/id_rsa")
+variable "priv_key" {
+    type = string
+    default = file("/home/ubuntu/.ssh/id_rsa")
   
-# }
+}
 
 # variable "username" {
 #     type = string

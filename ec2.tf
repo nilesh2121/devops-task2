@@ -14,7 +14,7 @@ resource "aws_instance" "webserver" {
     # user_data = file("script/user.sh")
 
     connection {
-      type         = "ssh"
+      type        = "ssh"
       host        = aws_instance.webserver.public_ip
       user        = "ubuntu"
       private_key = file("/home/ubuntu/.ssh/id_rsa")
@@ -32,61 +32,31 @@ resource "aws_instance" "webserver" {
       ]
 
     }
-    depends_on = [
-      aws_instance.webserver
 
-    ]
+    provisioner "remote-exec" {
+      inline = ["echo 'Wait until SSH is ready'"]
 
-    provisioner "file" {
-      source = "/home/ubuntu/devops-task2/apache.yml"
-      destination = "/home/ubuntu/apache.yml"
+      connection {
+        type = "ssh"
+        user = "ubuntu"
+        private_key = file("/home/ubuntu/.ssh/id_rsa")
+        host = aws_instance.webserver.public_ip
+
+
+      }
+      provisioner "local-exec" {
+        commnd = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${var.priv_key} apache.yml"
       
-    }
+      }
 
-
-
-
-  
-
-
-   
-   
-      
-}
-
-
-
-  resource "local_file" "ip" {
-    content  = aws_instance.webserver.public_ip
-    filename = "ip.txt"
-    depends_on = [
-      aws_instance.webserver
-    ]
-
-  connection {
-    type         = "ssh"
-    host        = aws_instance.webserver.public_ip
-    user        = "ubuntu"
-    private_key = file("/home/ubuntu/.ssh/id_rsa")
-    timeout     = "4m"
-    }
-
-  provisioner "file" {
-    source      = "ip.txt"
-    destination = "/home/ubuntu/hosts"
-
-       }
-
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${file("~/.ssh/id_rsa")} apache.yml"
-
-
-      #command = "sudo ansible-playbook  -i ${aws_instance.webserver.public_ip}, --private-key ${file("~/.ssh/id_rsa")} apache.yml"
-      
     
-  }      
+      
+    }
 
+
+   
   }
+
 
 
 
