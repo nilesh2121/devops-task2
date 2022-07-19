@@ -75,19 +75,19 @@ variable "pub_key" {
   
 }
 
-# variable "username" {
-#     type = string
-#     default = "devops"
+variable "username" {
+    type = string
+    default = "devops"
 
   
-# }
+}
 
-# variable "password" {
-#     type = string
-#     default = "india@123"
+variable "password" {
+    type = string
+    default = "nasa@123"
 
   
-# }
+}
 
 
 
