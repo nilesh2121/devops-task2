@@ -41,13 +41,17 @@ resource "aws_instance" "webserver" {
         user = "ubuntu"
         private_key = file("/home/ubuntu/.ssh/id_rsa")
         host = aws_instance.webserver.public_ip
+        
 
-
-      }
+        
       provisioner "local-exec" {
         commnd = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${var.priv_key} apache.yml"
       
+      }     
+
+
       }
+
 
     
       
