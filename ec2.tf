@@ -13,9 +13,19 @@ resource "aws_instance" "webserver" {
 
     # user_data = file("script/user.sh")
 
+    connection {
+      type        = "ssh"
+      host        = aws_instance.webserver.public_ip
+      user        = "ubuntu"
+      private_key = file(var.priv_key)
+      timeout     = "4m"
+    }
+    
+     
+
     provisioner "remote-exec" {
       inline = [
-        "# /bin/bash",
+        # /bin/bash
         "sudo apt update",
         "sudo apt install software-properties-common",
         "sudo add-apt-repository --yes --update ppa:ansible/ansible",
@@ -24,18 +34,6 @@ resource "aws_instance" "webserver" {
       ]
 
     }
-
-    connection {
-      type        = "ssh"
-      host        = aws_instance.webserver.public_ip
-      user        = "ubuntu"
-      private_key = file("/home/ubuntu/.ssh/id_rsa")
-      timeout     = "4m"
-    }
-    
-     
-
-
 
     provisioner "remote-exec" {
       inline = ["echo 'Wait until SSH is ready'"]
