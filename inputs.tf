@@ -64,7 +64,7 @@ variable "subnet_cidrs_private" {
 
 variable "priv_key" {
     type = string
-    default = file("/home/ubuntu/.ssh/id_rsa")
+    default = "/home/ubuntu/.ssh/id_rsa"
   
 }
 
