@@ -17,7 +17,7 @@ resource "aws_instance" "webserver" {
       type        = "ssh"
       host        = aws_instance.webserver.public_ip
       user        = "ubuntu"
-      private_key = "~/.ssh/id_rsa"
+      private_key = var.priv_key
       timeout     = "4m"
     }
     
@@ -25,7 +25,7 @@ resource "aws_instance" "webserver" {
 
     provisioner "remote-exec" {
       inline = [
-        #!/bin/bash
+        # /bin/bash
         "sudo apt update",
         "sudo apt install software-properties-common",
         "sudo add-apt-repository --yes --update ppa:ansible/ansible",
