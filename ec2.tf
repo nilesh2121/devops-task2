@@ -15,7 +15,7 @@ resource "aws_instance" "webserver" {
 
     connection {
       type        = "ssh"
-      host        = aws_instance.webserver.private_ip
+      host        = aws_instance.webserver.public_ip
       user        = "ubuntu"
       private_key = file(var.priv_key)
       timeout     = "4m"
@@ -42,14 +42,14 @@ resource "aws_instance" "webserver" {
         type = "ssh"
         user = "ubuntu"
         private_key = file(var.priv_key)
-        host = aws_instance.webserver.private_ip
+        host = aws_instance.webserver.public_ip
  
       }
           
     }
 
     provisioner "local-exec" {
-      command = "ansible-playbook -i ${aws_instance.webserver.private_ip}, --private-key ${var.priv_key} apache.yml"
+      command = "ansible-playbook -i ${aws_instance.webserver.public_ip}, --private-key ${var.priv_key} apache.yml"
       
       }     
 
