@@ -68,6 +68,13 @@ variable "priv_key" {
   
 }
 
+
+variable "pub_key" {
+    type = string
+    default = "/home/ubuntu/.ssh/id_rsa.pub"
+  
+}
+
 # variable "username" {
 #     type = string
 #     default = "devops"
