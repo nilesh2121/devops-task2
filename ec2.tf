@@ -13,13 +13,13 @@ resource "aws_instance" "webserver" {
 
     # user_data = file("script/user.sh")
 
-    connection {
-      type        = "ssh"
-      host        = aws_instance.webserver.public_ip
-      user        = "ubuntu"
-      private_key = "~/.ssh/id_rsa"
-      timeout     = "4m"
-    } 
+    # connection {
+    #   type        = "ssh"
+    #   host        = aws_instance.webserver.public_ip
+    #   user        = "ubuntu"
+    #   private_key = "~/.ssh/id_rsa"
+    #   timeout     = "4m"
+    # } 
 
     provisioner "remote-exec" {
       inline = [
