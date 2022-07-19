@@ -13,24 +13,6 @@ resource "aws_instance" "webserver" {
 
     # user_data = file("script/user.sh")
 
-    connection {
-      type        = "ssh"
-      host        = aws_instance.webserver.public_ip
-      user        = "ubuntu"
-      private_key = file("/home/ubuntu/.ssh/id_rsa")
-      timeout     = "4m"
-    }
-    depends_on = [
-      aws_instance.webserver
-    ]
-    provisioner "remote-exec" {
-      inline = ["echo 'Wait until SSH is ready'"]
-        
-      
-    }
-    
-     
-
     provisioner "remote-exec" {
       inline = [
         "# /bin/bash",
@@ -42,6 +24,18 @@ resource "aws_instance" "webserver" {
       ]
 
     }
+
+    connection {
+      type        = "ssh"
+      host        = aws_instance.webserver.public_ip
+      user        = "ubuntu"
+      private_key = file("/home/ubuntu/.ssh/id_rsa")
+      timeout     = "4m"
+    }
+    
+     
+
+
 
     provisioner "remote-exec" {
       inline = ["echo 'Wait until SSH is ready'"]
