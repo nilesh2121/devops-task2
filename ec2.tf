@@ -93,33 +93,7 @@ resource "aws_instance" "dbserver" {
       Name = "db-server"
     }
     # user_data = file("script/user.sh")
-
-    connection {
-      type        = "ssh"
-      host        = aws_subnet.private_subnet.id
-      user        = "ubuntu"
-      private_key = file("/home/ubuntu/.ssh/id_rsa")
-      timeout     = "4m"
-    } 
-
-    provisioner "remote-exec" {
-      inline = [
-        # !/bin/bash
-        "sudo apt update",
-        "sudo apt install sudo apt install mysql-server",
-        "sudo systemctl start mysql.service"
-
-
-        
-      ]
-
-    }
     
-
-   
-
-
-
 
 
 }
