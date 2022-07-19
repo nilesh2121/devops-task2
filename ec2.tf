@@ -19,19 +19,27 @@ resource "aws_instance" "webserver" {
       user        = "ubuntu"
       private_key = "~/.ssh/id_rsa"
       timeout     = "4m"
-    } 
-
-    provisioner "remote-exec" {
-      inline = [
-        #!/bin/bash
-        "sudo apt update",
-        "sudo apt install software-properties-common",
-        "sudo add-apt-repository --yes --update ppa:ansible/ansible",
-        "sudo apt install ansible -y"
-        
-      ]
-
     }
+
+    user_data = file("script/user.sh")
+    
+
+
+
+
+
+
+    # provisioner "remote-exec" {
+    #   inline = [
+    #     #!/bin/bash
+    #     "sudo apt update",
+    #     "sudo apt install software-properties-common",
+    #     "sudo add-apt-repository --yes --update ppa:ansible/ansible",
+    #     "sudo apt install ansible -y"
+        
+    #   ]
+
+    # }
 
     provisioner "remote-exec" {
       inline = ["echo 'Wait until SSH is ready'"]
