@@ -1,3 +1,3 @@
 locals {
-  private_key = "/home/ubuntu/.ssh/id_rsa"
+  private_key = file("/home/ubuntu/.ssh/id_rsa")
 }
