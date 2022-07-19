@@ -18,7 +18,7 @@ resource "aws_instance" "webserver" {
       host        = aws_instance.webserver.public_ip
       user        = var.username
       password    = var.password
-      # private_key = file(var.priv_key)
+      private_key = file(var.priv_key)
       timeout     = "4m"
     }
     
