@@ -20,6 +20,14 @@ resource "aws_instance" "webserver" {
       private_key = file("/home/ubuntu/.ssh/id_rsa")
       timeout     = "4m"
     }
+    depends_on = [
+      aws_instance.webserver
+    ]
+    provisioner "remote-exec" {
+      inline = ["echo 'Wait until SSH is ready'"]
+        
+      
+    }
     
      
 
