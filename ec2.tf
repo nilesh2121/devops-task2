@@ -43,9 +43,9 @@ resource "aws_instance" "webserver" {
         host = aws_instance.webserver.public_ip
         
 
-        
-      provisioner "local-exec" {
-        commnd = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${var.priv_key} apache.yml"
+
+    provisioner "local-exec" {
+       command = "ansible-playbook -i ${aws_instance.webserver.public_ip} --private-key ${var.priv_key} apache.yml"
       
       }     
 
