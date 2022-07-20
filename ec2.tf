@@ -47,8 +47,10 @@ resource "aws_instance" "webserver" {
         host = aws_instance.webserver.public_ip
  
       }
+      
           
     }
+
 
 
     provisioner "local-exec" {
