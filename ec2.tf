@@ -36,11 +36,6 @@ resource "aws_instance" "webserver" {
 
     }
 
-    provisioner "file" {
-      source = "./apache.yml"
-      destination = "/home/ubuntu/apache.yml"
-      
-    }
 
     provisioner "remote-exec" {
       inline = ["echo 'Wait until SSH is ready'"]
@@ -57,7 +52,7 @@ resource "aws_instance" "webserver" {
 
 
     provisioner "local-exec" {
-      command = "ansible-playbook -i ${aws_instance.webserver.public_ip}, --private-key ${tls_private_key.rsa.private_key_pem} /var/lib/jenkins/workspace/devops_task1/apache.yml"
+      command = "ansible-playbook -i ${aws_instance.webserver.public_ip}, --private-key ${tls_private_key.rsa.private_key_pem} apache.yml"
       
       }     
 
@@ -66,28 +61,7 @@ resource "aws_instance" "webserver" {
   }
 
 
-  resource "local_file" "playbook" {
-    content = "apache.yml"
-    filename = "home/ubuntu/apache.yml"
-    depends_on = [
-      aws_instance.webserver
-    ]
 
-    connection {
-      type = "ssh"
-      user = "ubuntu"
-      private_key = tls_private_key.rsa.private_key_pem
-      host = aws_instance.webserver.public_ip
- 
-      }
-
-      provisioner "file" {
-        source = "apache.yml"
-        destination = "home/ubuntu/apache.yml"
-      
-      } 
-    
-  }
 
 
 
