@@ -36,7 +36,7 @@ resource "aws_instance" "webserver" {
     }
 
     provisioner "file" {
-      source = "/home/ubuntu/apache.yml"
+      source = "apache.yml"
       destination = "/home/ubuntu/apache.yml"
 
       connection {
