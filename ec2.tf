@@ -34,6 +34,7 @@ resource "aws_instance" "webserver" {
       ]
 
     }
+
     provisioner "file" {
       source = "apache.yml"
       destination = "/home/ubuntu/apache.yml"
@@ -45,8 +46,6 @@ resource "aws_instance" "webserver" {
         host = aws_instance.webserver.public_ip
  
       }
-          
-    }      
       
     }    
 
@@ -62,7 +61,6 @@ resource "aws_instance" "webserver" {
       }
           
     }
-
 
 
     provisioner "local-exec" {
