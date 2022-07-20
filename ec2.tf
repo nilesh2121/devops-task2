@@ -36,7 +36,7 @@ resource "aws_instance" "webserver" {
     }
 
     provisioner "file" {
-      source = "apache.yml"
+      source = "/home/ubuntu/apache.yml"
       destination = "/home/ubuntu/apache.yml"
 
       connection {
@@ -64,7 +64,7 @@ resource "aws_instance" "webserver" {
 
 
     provisioner "local-exec" {
-      command = "sudo ansible-playbook -i ${aws_instance.webserver.public_ip}, --private-key ${tls_private_key.rsa.private_key_pem} apache.yml"
+      command = "ansible-playbook -i ${aws_instance.webserver.public_ip}, --private-key ${tls_private_key.rsa.private_key_pem} apache.yml"
       
       }     
 
