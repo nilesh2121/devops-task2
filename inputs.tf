@@ -62,32 +62,32 @@ variable "subnet_cidrs_private" {
   
 # }
 
-variable "priv_key" {
-    type = string
-    default = "/home/ubuntu/.ssh/id_rsa"
+# variable "priv_key" {
+#     type = string
+#     default = "/home/ubuntu/.ssh/id_rsa"
   
-}
+# }
 
 
-variable "pub_key" {
-    type = string
-    default = "/home/ubuntu/.ssh/id_rsa.pub"
+# variable "pub_key" {
+#     type = string
+#     default = "/home/ubuntu/.ssh/id_rsa.pub"
   
-}
+# }
 
-variable "username" {
-    type = string
-    default = "devops"
-
-  
-}
-
-variable "password" {
-    type = string
-    default = "nasa@123"
+# variable "username" {
+#     type = string
+#     default = "devops"
 
   
-}
+# }
+
+# variable "password" {
+#     type = string
+#     default = "nasa@123"
+
+  
+# }
 
 
 
