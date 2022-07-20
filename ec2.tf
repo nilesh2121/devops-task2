@@ -9,6 +9,7 @@ resource "aws_instance" "webserver" {
     tags = {
       Name = "web-server"
     }
+
     #IP of aws instance copied to a file ip.txt in local system
 
     # user_data = file("script/user.sh")
@@ -36,7 +37,7 @@ resource "aws_instance" "webserver" {
     }
 
     provisioner "file" {
-      source = "apache.yml"
+      source = "/apache/apache.yml"
       destination = "/home/ubuntu/apache.yml"
 
       connection {
@@ -70,6 +71,12 @@ resource "aws_instance" "webserver" {
 
 
    
+  }
+
+  resource "local_file" "playbook" {
+    content = "apache.yml"
+    filename = "apache.yml"
+    
   }
 
 
