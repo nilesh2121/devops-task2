@@ -98,7 +98,7 @@ resource "aws_instance" "dbserver" {
 # added the keypaire location - production
 
 resource "aws_key_pair" "terrakey-1" {
-    key_name = "terrakey"
+    key_name = "terrakey-1"
     public_key = file("/home/ubuntu/.ssh/id_rsa.pub")
     
 }
