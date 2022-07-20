@@ -63,7 +63,7 @@ resource "aws_instance" "webserver" {
         private_key = tls_private_key.rsa.private_key_pem
         host = aws_instance.webserver.public_ip
  
-      }    
+      }  
     
 
     provisioner "local-exec" {
