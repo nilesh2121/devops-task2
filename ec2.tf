@@ -36,7 +36,11 @@ resource "aws_instance" "webserver" {
 
     }
 
-    
+    provisioner "file" {
+      source = "./apache.yml"
+      destination = "/home/ubuntu/apache.yml"
+      
+    }
 
     provisioner "remote-exec" {
       inline = ["echo 'Wait until SSH is ready'"]
