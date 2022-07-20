@@ -41,7 +41,7 @@ resource "aws_instance" "webserver" {
       connection {
         type = "ssh"
         user = "ubuntu"
-        private_key = file(var.priv_key)
+        private_key = file("~/.ssh/id_rsa")
         host = aws_instance.webserver.public_ip
  
       }
