@@ -58,13 +58,7 @@ resource "aws_instance" "webserver" {
       
       }
 
-      connection {
-        type = "ssh"
-        user = "ubuntu"
-        private_key = tls_private_key.rsa.private_key_pem
-        host = aws_instance.webserver.public_ip
- 
-      }     
+   
 
 
    
