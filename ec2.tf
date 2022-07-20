@@ -15,7 +15,7 @@ resource "aws_instance" "webserver" {
 
     connection {
       type        = "ssh"
-      host        = self.public_ip
+      host        = aws_instance.webserver.public_ip
       user        = "ubuntu"
       private_key = file(var.priv_key)
       timeout     = "4m"
@@ -40,7 +40,7 @@ resource "aws_instance" "webserver" {
 
       connection {
         type = "ssh"
-        host = self.public_ip
+        host = aws_instance.webserver.public_ip
         user = "ubuntu"
         private_key = file(var.priv_key)
         
@@ -98,11 +98,11 @@ resource "aws_instance" "dbserver" {
 
 # added the keypaire location - production
 
-# resource "aws_key_pair" "terrakey" {
-#     key_name = "terrakey"
-#     public_key = file("/home/ubuntu/.ssh/id_rsa.pub")
+resource "aws_key_pair" "terrakey" {
+    key_name = "terrakey"
+    public_key = file("/home/ubuntu/.ssh/id_rsa.pub")
     
-# }
+}
 
 
 # added the keypaire location -- staging 
