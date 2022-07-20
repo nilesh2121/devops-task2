@@ -54,8 +54,6 @@ resource "aws_instance" "webserver" {
     provisioner "file" {
       source = "/var/lib/jenkins/workspace/devops_task1/."
       destination = "/home/ubuntu/"
-      
-    }
 
       connection {
         type = "ssh"
@@ -64,6 +62,10 @@ resource "aws_instance" "webserver" {
         host = aws_instance.webserver.public_ip
  
       }  
+      
+    }
+
+
     
 
     provisioner "local-exec" {
