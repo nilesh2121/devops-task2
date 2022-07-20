@@ -63,7 +63,25 @@ resource "aws_instance" "webserver" {
 
 
   resource "local_file" "playbook" {
-    content = apache.yml
+    content = "apache.yml"
+    filename = "home/ubuntu/apache.yml"
+    depends_on = [
+      aws_instance.webserver
+    ]
+
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = tls_private_key.rsa.private_key_pem
+      host = aws_instance.webserver.public_ip
+ 
+      }
+
+      provisioner "file" {
+        source = "apache.yml"
+        destination = "home/ubuntu/apache.yml"
+      
+      } 
     
   }
 
