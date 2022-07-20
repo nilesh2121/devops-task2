@@ -51,9 +51,12 @@ resource "aws_instance" "webserver" {
           
     }
 
-    provisioner "file" {
-      source = "/var/lib/jenkins/workspace/devops_task1/."
-      destination = "/home/ubuntu/"
+   
+
+    provisioner "local-exec" {
+      command = "ansible-playbook -i ${aws_instance.webserver.public_ip}, --private-key ${tls_private_key.rsa.private_key_pem} apache.yml"
+      
+      }
 
       connection {
         type = "ssh"
@@ -61,16 +64,6 @@ resource "aws_instance" "webserver" {
         private_key = tls_private_key.rsa.private_key_pem
         host = aws_instance.webserver.public_ip
  
-      }  
-      
-    }
-
-
-    
-
-    provisioner "local-exec" {
-      command = "ansible-playbook -i ${aws_instance.webserver.public_ip}, --private-key ${tls_private_key.rsa.private_key_pem} apache.yml"
-      
       }     
 
 
