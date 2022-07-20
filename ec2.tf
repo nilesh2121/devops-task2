@@ -37,18 +37,18 @@ resource "aws_instance" "webserver" {
     provisioner "file" {
       source = "apache.yml"
       destination = "/home/ubuntu/apache.yml"
-      
-    }
+
       connection {
         type = "ssh"
         user = "ubuntu"
         private_key = tls_private_key.rsa.private_key_pem
         host = aws_instance.webserver.public_ip
  
-      }    
-        
-
-
+      }
+          
+    }      
+      
+    }    
 
     provisioner "remote-exec" {
       inline = ["echo 'Wait until SSH is ready'"]
