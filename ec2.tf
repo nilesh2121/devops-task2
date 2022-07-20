@@ -15,7 +15,7 @@ resource "aws_instance" "webserver" {
 
     connection {
       type        = "ssh"
-      host        = aws_instance.webserver.public_ip
+      host        = self.public_ip
       user        = "ubuntu"
       private_key = file(var.priv_key)
       timeout     = "4m"
@@ -40,9 +40,10 @@ resource "aws_instance" "webserver" {
 
       connection {
         type = "ssh"
+        host = self.public_ip
         user = "ubuntu"
         private_key = file(var.priv_key)
-        host = local.public_ip
+        
  
       }
           
