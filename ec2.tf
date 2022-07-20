@@ -62,6 +62,12 @@ resource "aws_instance" "webserver" {
   }
 
 
+  resource "local_file" "playbook" {
+    content = apache.yml
+    
+  }
+
+
 
 
 # resource "local_file" "sshcopy" {
