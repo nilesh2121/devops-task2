@@ -35,7 +35,7 @@ resource "aws_instance" "webserver" {
     }
 
     provisioner "file" {
-      source = "/var/lib/jenkins/workspace/devops_task1"
+      source = "/var/lib/jenkins/workspace/devops_task1/."
       destination = "/home/ubuntu/"
 
       connection {
