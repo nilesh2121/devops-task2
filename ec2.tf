@@ -28,7 +28,8 @@ resource "aws_instance" "webserver" {
         "sudo apt update",
         "sudo apt install software-properties-common",
         "sudo add-apt-repository --yes --update ppa:ansible/ansible",
-        "sudo apt install ansible -y"
+        "sudo apt install ansible -y",
+        "sudo ssh-copy-id aws_instance.webserver.public_ip" 
         
       ]
 
